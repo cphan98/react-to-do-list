@@ -1,10 +1,10 @@
 import React from 'react'
-import ToDo from './components/ToDo'
+import TodoWrapper from './components/ToDoWrapper'
 
 const App = () => {
   return (
     <div className='bg-[#a6c1e2] text-[#305066] grid py-4 min-h-screen'>
-      <ToDo/>
+      <TodoWrapper/>
     </div>
   )
 }

@@ -1,8 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import checklist_icon from '../assets/checklist.png'
-import ToDoItems from './ToDoItems'
 
-const ToDo = () => {
+const TodoWrapper = () => {
   const [todoList, setTodoList] = useState(localStorage.getItem("todos") ? JSON.parse(localStorage.getItem("todos")) : []);
 
   const inputRef = useRef();
@@ -18,6 +17,7 @@ const ToDo = () => {
       id: Date.now(),
       text: inputText,
       isComplete: false,
+      isEditing: false,
     }
 
     setTodoList((prevTodos) => [...prevTodos, newTodo]);
@@ -40,6 +40,10 @@ const ToDo = () => {
         return todo;
       })
     })
+  }
+
+  const editTodo = (id) => {
+    setTodoList(todoList.map(todo.id === id ? {...todo, isEditing: !todo.isEditing} : todo))
   }
 
   useEffect(() => {
@@ -67,7 +71,7 @@ const ToDo = () => {
       {/* to do list */}
       <div>
         {todoList.map((item, index) => {
-          return <ToDoItems key={index} text={item.text} id={item.id} isComplete={item.isComplete} deleteTodo={deleteTodo} toggleTodo={toggleTodo}/>
+          return <TodoItems key={index} text={item.text} id={item.id} isComplete={item.isComplete} deleteTodo={deleteTodo} toggleTodo={toggleTodo} editTodo={editTodo}/>
         })}
       </div>
 
@@ -75,4 +79,4 @@ const ToDo = () => {
   )
 }
 
-export default ToDo
+export default TodoWrapper

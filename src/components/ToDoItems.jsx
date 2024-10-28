@@ -6,7 +6,7 @@ import delete_red_icon from '../assets/delete-red.png'
 import edit_gray_icon from '../assets/edit-gray.png'
 import edit_green_icon from '../assets/edit-green.png'
 
-const ToDoItems = ({text, id, isComplete, deleteTodo, toggleTodo}) => {
+const TodoItems = ({text, id, isComplete, deleteTodo, toggleTodo, editTodo}) => {
     return (
         <div className='flex items-center my-3 gap-2'>
             <div onClick={() => {toggleTodo(id)}} className='flex flex-1 items-center cursor-pointer'>
@@ -15,10 +15,10 @@ const ToDoItems = ({text, id, isComplete, deleteTodo, toggleTodo}) => {
                     {text}
                 </p>
             </div>
-            <img onMouseOver={e => e.currentTarget.src = edit_green_icon} onMouseOut={e => e.currentTarget.src = edit_gray_icon} onClick={() => {}} className='w-5 cursor-pointer' src={edit_gray_icon} alt="" title='Edit item'/>
-            <img onMouseOver={e => e.currentTarget.src = delete_red_icon} onMouseOut={e => e.currentTarget.src = delete_gray_icon} onClick={() => {deleteTodo(id)}} className='w-5 cursor-pointer' src={delete_gray_icon} alt="" title='Delete item' />
+            <img onMouseOver={e => e.currentTarget.src = edit_green_icon} onMouseOut={e => e.currentTarget.src = edit_gray_icon} onClick={() => {editTodo(id)}} className='w-5 cursor-pointer' src={edit_gray_icon} alt="" title='Edit task'/>
+            <img onMouseOver={e => e.currentTarget.src = delete_red_icon} onMouseOut={e => e.currentTarget.src = delete_gray_icon} onClick={() => {deleteTodo(id)}} className='w-5 cursor-pointer' src={delete_gray_icon} alt="" title='Delete task' />
         </div>
     )
 }
 
-export default ToDoItems
+export default TodoItems
