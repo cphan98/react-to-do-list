@@ -1,5 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import checklist_icon from '../assets/checklist.png'
+import AddTodoForm from './AddTodoForm';
+import TodoItems from './ToDoItems';
 
 const TodoWrapper = () => {
   const [todoList, setTodoList] = useState(localStorage.getItem("todos") ? JSON.parse(localStorage.getItem("todos")) : []);
@@ -17,7 +19,6 @@ const TodoWrapper = () => {
       id: Date.now(),
       text: inputText,
       isComplete: false,
-      isEditing: false,
     }
 
     setTodoList((prevTodos) => [...prevTodos, newTodo]);
@@ -34,16 +35,12 @@ const TodoWrapper = () => {
   const toggleTodo = (id) => {
     setTodoList((prevTodos) => {
       return prevTodos.map((todo) => {
-        if(todo.id === id) {
+        if (todo.id === id) {
           return {...todo, isComplete: !todo.isComplete}
         }
         return todo;
       })
     })
-  }
-
-  const editTodo = (id) => {
-    setTodoList(todoList.map(todo.id === id ? {...todo, isEditing: !todo.isEditing} : todo))
   }
 
   useEffect(() => {
@@ -61,18 +58,13 @@ const TodoWrapper = () => {
       </div>
 
       {/* input */}
-      <form onSubmit={addTodo} className='flex items-center my-7 bg-gray-200 rounded-full'>
-        {/* <form  className=''> */}
-          <input ref={inputRef} className='bg-transparent border-0 outline-none flex-1 h-14 pl-6 pr-2 placeholder:text-slate-400' type="text" placeholder='Add your task' />
-          <button className='border-none rounded-full bg-[#b2ae77] w-32 h-14 text-[#fefcf6] text-lg font-medium cursor-pointer' type='submit'>ADD</button>
-        {/* </form> */}
-      </form>
+      <AddTodoForm addTodo={addTodo} inputRef={inputRef}/>
 
       {/* to do list */}
       <div>
-        {todoList.map((item, index) => {
-          return <TodoItems key={index} text={item.text} id={item.id} isComplete={item.isComplete} deleteTodo={deleteTodo} toggleTodo={toggleTodo} editTodo={editTodo}/>
-        })}
+        {todoList.map((item, index) => (
+          <TodoItems item={item} key={index} text={item.text} id={item.id} isComplete={item.isComplete} deleteTodo={deleteTodo} toggleTodo={toggleTodo}/>
+        ))}
       </div>
 
     </div>

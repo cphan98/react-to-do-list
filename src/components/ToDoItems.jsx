@@ -6,7 +6,7 @@ import delete_red_icon from '../assets/delete-red.png'
 import edit_gray_icon from '../assets/edit-gray.png'
 import edit_green_icon from '../assets/edit-green.png'
 
-const TodoItems = ({text, id, isComplete, deleteTodo, toggleTodo, editTodo}) => {
+const TodoItems = ({text, id, isComplete, deleteTodo, toggleTodo}) => {
     return (
         <div className='flex items-center my-3 gap-2'>
             <div onClick={() => {toggleTodo(id)}} className='flex flex-1 items-center cursor-pointer'>
